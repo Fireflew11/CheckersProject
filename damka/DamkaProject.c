@@ -5,7 +5,7 @@
 typedef unsigned char Board[BOARD_SIZE][BOARD_SIZE];
 
 
-
+נקניק
 typedef struct _checkersPos
 {
 	char row, col;
