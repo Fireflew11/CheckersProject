@@ -3,16 +3,13 @@
 #define BOARD_SIZE 8
 #define P_M_LINE 19
 typedef unsigned char Board[BOARD_SIZE][BOARD_SIZE];
+typedef unsigned char Player;
 
-
-נקניק
 typedef struct _checkersPos
 {
 	char row, col;
 }checkersPos;
 
-
-typedef char Player;
 
 typedef struct _SingleSourceMovesTreeNode {
 	Board board;
