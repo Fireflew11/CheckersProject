@@ -127,11 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardFunctions.c" />
     <ClCompile Include="DamkaProject.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BoardFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,13 +18,5 @@
     <ClCompile Include="DamkaProject.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardFunctions.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BoardFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

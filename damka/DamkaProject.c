@@ -3,7 +3,7 @@
 #define BOARD_SIZE 8
 #define P_M_LINE 19
 typedef unsigned char Board[BOARD_SIZE][BOARD_SIZE];
-#include "BoardFunctions.h"
+
 
 
 typedef struct _checkersPos
@@ -162,6 +162,6 @@ void main() {
 
 //col and row are 0-7 for comfort
 SingleSourceMovesTree* FindSingleSourceMoves(Board board, checkersPos* src) {
-	
+	return NULL;
 }
 
