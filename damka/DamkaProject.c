@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define BOARD_SIZE 8
 #define P_M_LINE 19
 typedef unsigned char Board[BOARD_SIZE][BOARD_SIZE];
@@ -40,7 +41,7 @@ void copyBoard(Board boardRes, Board boardfrom) {
 		}
 	}
 }
-checkersPos* createNewPos(char col, char row) {
+checkersPos* createNewPos(char row, char col) {
 	checkersPos* res = (checkersPos*)malloc(sizeof(checkersPos));
 	checkAllocation(res);
 	res->col = col;
@@ -103,7 +104,7 @@ void drawBoard(Board board) {
 }
 
 
-/*
+
 SingleSourceMovesTreeNode* createNewNode(checkersPos* pos, Board board, unsigned short total_caprures_so_far,
 	                                     SingleSourceMovesTreeNode* nextmove0, SingleSourceMovesTreeNode* nextmove1) 
 {
@@ -118,32 +119,131 @@ SingleSourceMovesTreeNode* createNewNode(checkersPos* pos, Board board, unsigned
 }
 
 
-/*
-SingleSourceMovesTreeNode* FindSingleSourcesMovesHelper(Board board, checkersPos* src, char type) {
+//can assume not NULL
+SingleSourceMovesTreeNode* FindSingleSourcesMovesHelper(Board board, checkersPos* src, char type, unsigned short totalCapsSoFar) {
 	SingleSourceMovesTreeNode* nextMove0, * nextMove1, * res;
-	checkersPos next0Pos, next1Pos;
-	if (board[src->col][src->row] == '\0')
-		return NULL;
+	checkersPos* next0Pos, *next1Pos;
+	//check if we need to go down or up in board
+	bool isTopPlayer = (type == 'T');
 
+	if (isTopPlayer) {
 
-	else if (board[src->col][src->row] == 'B') {
-		if (src->col == 0) {
+		//if in left corner
+		if (src->col == 0)
+		{
 			nextMove0 = NULL;
-			next1Pos.col = src->col + 1;
-			next1Pos.row = src->row - 1;
-			nextMove1 = FindSingleSourceMoves(board, &next1Pos);
+			//if empty space can just go into that one
+			if (board[src->row + 1][src->col + 1] == ' ' && totalCapsSoFar == 0) {
+				next1Pos = createNewPos(src->row + 1, src->col + 1);
+				nextMove1 = createNewNode(next1Pos, board, totalCapsSoFar, NULL, NULL);
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			
+			//if not empty space but still blocked for taking (2 + is taken already or right is taken by a friendly piece) or empty space but captured before1
+			else if (board[src->row + 2][src->col + 2] == 'B' || board[src->row + 2][src->col + 2] == 'T' || board[src->row + 1][src->col + 1] == 'T' || ) {
+				nextMove1 = NULL;
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//else there is a piece we can take 
+			else {
+				next1Pos = createNewPos(src->row + 2, src->col + 2);
+				nextMove1 = FindSingleSourcesMovesHelper(board, next1Pos, type, totalCapsSoFar + 1);
+				res = createNewNode(src, board, totalCapsSoFar + nextMove1->total_caprures_so_far, nextMove0, nextMove1);
+				return res;
+			}
 		}
-		else if (src->col == 7) {
-			next0Pos = NULL;
-			next1Pos = createNewPos(src->col + 1, src->row - 1);
-			nextMove1 = FindSingleSourceMoves(board, next1Pos);
+		//if in right corner
+		else if (src->col == 8) {
+			nextMove1 = NULL;
+			//if empty space can just go into that one
+			if (board[src->row + 1][src->col - 1] == ' ') {
+				next0Pos = createNewPos(src->row + 1, src->col - 1);
+				nextMove0 = createNewNode(next0Pos, board, totalCapsSoFar, NULL, NULL);
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//if not empty space but still blocked for taking (2 + is taken already or right is taken by a friendly piece)
+			else if (board[src->row + 2][src->col - 2] == 'B' || board[src->row + 2][src->col - 2] == 'T' || board[src->row + 1][src->col - 1] == 'T') {
+				nextMove0 = NULL;
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//else there is a piece we can take 
+			else {
+				next0Pos = createNewPos(src->row + 2, src->col - 2);
+				nextMove0 = FindSingleSourcesMovesHelper(board, next0Pos, type, totalCapsSoFar + 1);
+				res = createNewNode(src, board, totalCapsSoFar + nextMove0->total_caprures_so_far, nextMove0, nextMove1);
+				return res;
+			}
 		}
-	}
-	else if (board[src->col][src->row] == 'T') {
+		//if in middle
+		else {
+
+		}	//if in left corner
+		if (src->col == 0)
+		{
+			nextMove0 = NULL;
+			//if empty space can just go into that one
+			if (board[src->row + 1][src->col + 1] == ' ') {
+				next1Pos = createNewPos(src->row + 1, src->col + 1);
+				nextMove1 = createNewNode(next1Pos, board, totalCapsSoFar, NULL, NULL);
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//if not empty space but still blocked for taking (2 + is taken already or right is taken by a friendly piece)
+			else if (board[src->row + 2][src->col + 2] == 'B' || board[src->row + 2][src->col + 2] == 'T' || board[src->row + 1][src->col + 1] == 'T') {
+				nextMove1 = NULL;
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//else there is a piece we can take 
+			else {
+				next1Pos = createNewPos(src->row + 2, src->col + 2);
+				nextMove1 = FindSingleSourcesMovesHelper(board, next1Pos, type, totalCapsSoFar + 1);
+				res = createNewNode(src, board, totalCapsSoFar + nextMove1->total_caprures_so_far, nextMove0, nextMove1);
+				return res;
+			}
+		}
+		//if in right corner
+		else if (src->col == 8) {
+			nextMove1 = NULL;
+			//if empty space can just go into that one
+			if (board[src->row + 1][src->col - 1] == ' ') {
+				next0Pos = createNewPos(src->row + 1, src->col - 1);
+				nextMove0 = createNewNode(next0Pos, board, totalCapsSoFar, NULL, NULL);
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//if not empty space but still blocked for taking (2 + is taken already or right is taken by a friendly piece)
+			else if (board[src->row + 2][src->col - 2] == 'B' || board[src->row + 2][src->col - 2] == 'T' || board[src->row + 1][src->col - 1] == 'T') {
+				nextMove0 = NULL;
+				res = createNewNode(src, board, totalCapsSoFar, nextMove0, nextMove1);
+				return res;
+			}
+			//else there is a piece we can take 
+			else {
+				next0Pos = createNewPos(src->row + 2, src->col - 2);
+				nextMove0 = FindSingleSourcesMovesHelper(board, next0Pos, type, totalCapsSoFar + 1);
+				res = createNewNode(src, board, totalCapsSoFar + nextMove0->total_caprures_so_far, nextMove0, nextMove1);
+				return res;
+			}
+		}
+		//if in middle
+		else {
+
+		}
+
+
+
 
 	}
+
+
+
 }
-*/
+
 
 
 void main() {
@@ -159,6 +259,13 @@ void main() {
 
 //col and row are 0-7 for comfort
 SingleSourceMovesTree* FindSingleSourceMoves(Board board, checkersPos* src) {
-	return NULL;
+	SingleSourceMovesTree* res = NULL;
+	if (board[src->row][src->col] != NULL)
+	{
+		res = (SingleSourceMovesTree*)malloc(sizeof(SingleSourceMovesTree));
+		checkAllocation(res);
+		res->source = FindSingleSourcesMovesHelper(board, src, board[src->row][src->col], 0);
+	}
+	return res;
 }
 
