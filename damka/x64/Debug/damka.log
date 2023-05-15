@@ -1,2 +1,10 @@
-﻿  DamkaProject.c
+﻿  SingleMoveListCell.c
+C:\Users\Tom\source\repos\damka\damka\SingleMoveListCell.c(36,85): warning C4028: formal parameter 1 different from declaration
+C:\Users\Tom\source\repos\damka\damka\SingleMoveListCell.c(36,125): warning C4029: declared formal parameter list different from definition
+  SingleMoveTree.c
+C:\Users\Tom\source\repos\damka\damka\SingleMoveTree.c(15,51): warning C4047: '!=': 'int' differs in levels of indirection from 'void *'
+C:\Users\Tom\source\repos\damka\damka\SingleMoveTree.c(80,2): warning C4013: 'copyBoard' undefined; assuming extern returning int
+  Generating Code...
+C:\Users\Tom\source\repos\damka\damka\SingleMoveListCell.c(39): warning C4716: 'FindSingleSourceOptimalMoveHelper': must return a value
+C:\Users\Tom\source\repos\damka\damka\SingleMoveListCell.c(35): warning C4716: 'FindSingleSourceOptimalMove': must return a value
   damka.vcxproj -> C:\Users\Tom\source\repos\damka\x64\Debug\damka.exe

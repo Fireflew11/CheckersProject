@@ -119,6 +119,17 @@ checkersPos* createNewPos(char row, char col) {
 	return res;
 }
 
+int getTreeHeight(SingleSourceMovesTreeNode * source) {
+	if (source == NULL)
+		return -1;
+	else
+	{
+		int leftHeight = 1 + getTreeHeight(source->nextMove[0]);
+		int rightHeight = 1 + getTreeHeight(source->nextMove[1]);
+		return max(leftHeight, rightHeight);
+	}
+}
+
 int getFlagType(char type) {
 	if (type == 'T')
 		return TYPE_FLAG_T;

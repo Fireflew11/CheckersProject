@@ -24,12 +24,18 @@
     <ClCompile Include="SingleMoveTree.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SingleMoveListCell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="singleMoveTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleMoveListCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
