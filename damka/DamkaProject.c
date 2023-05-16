@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "BoardFunctions.h"
 #include "singleMoveTree.h"
+#include "SingleMoveListCell.h"
 #define TYPE_FLAG_T 1
 #define TYPE_FLAG_B -1
 typedef unsigned char Player;
