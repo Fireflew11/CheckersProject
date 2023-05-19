@@ -1,6 +1,2 @@
 ﻿  DamkaProject.c
-  SingleMoveTree.c
-C:\Users\Tom\source\repos\damka\damka\SingleMoveTree.c(15,51): warning C4047: '!=': 'int' differs in levels of indirection from 'void *'
-C:\Users\Tom\source\repos\damka\damka\SingleMoveTree.c(77,2): warning C4013: 'copyBoard' undefined; assuming extern returning int
-  Generating Code...
-  damka.vcxproj -> C:\Users\Tom\source\repos\damka\x64\Debug\damka.exe
+  damka.vcxproj -> C:\Users\USER\Source\Repos\CheckersProject\x64\Debug\damka.exe

@@ -39,11 +39,13 @@ void main() {
 	createBoard(board);
 	
 
-	board[4][3] = 'B';
+	/*board[4][3] = 'B';
 	board[3][2] = 'T';
-	board[2][1] = ' ';
-	checkersPos* pos = createNewPos('E', '3');
+	board[2][1] = ' ';*/
+	checkersPos* pos = createNewPos('G', '2');
 	SingleSourceMovesTree *tree = FindSingleSourceMoves(board, pos);
+	SingleSourceMovesList* lst = FindSingleSourceOptimalMove(tree);
+	printList(lst);
 	drawBoard(tree->source->nextMove[0]->board);
 	printf(":)");
 
