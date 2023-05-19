@@ -129,7 +129,6 @@
   <ItemGroup>
     <ClCompile Include="BoardFunctions.c" />
     <ClCompile Include="DamkaProject.c" />
-    <ClCompile Include="q2.c" />
     <ClCompile Include="SingleMoveListCell.c" />
     <ClCompile Include="SingleMoveTree.c" />
   </ItemGroup>

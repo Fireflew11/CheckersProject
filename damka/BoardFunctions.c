@@ -41,6 +41,7 @@ void drawPMLine() {
 	printf("\n");
 }
 void drawBoard(Board board) {
+
 	int rowCounter = 0;
 	for (int i = 0; i < P_M_LINE; i++)
 	{

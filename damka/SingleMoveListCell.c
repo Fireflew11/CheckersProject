@@ -28,7 +28,7 @@ void insertNodeToEndList(SingleSourceMovesList* lst, SingleSourceMovesListCell* 
 
 bool isEmptyList(SingleSourceMovesList* lst) {
 
-	if (lst->head == NULL)
+	if (lst == NULL)
 		return true;
 	else
 		return false;
@@ -114,30 +114,7 @@ SingleSourceMovesListCell* FindSingleSourceOptimalMoveHelper(SingleSourceMovesLi
 		return leftPath;
 	}
 	else { //case 5, there are sub trees to the right and left;
-		res = whatPathToChooseHelper(source);
-		if (res == 1) { // need to make it look better
-			rightPath = FindSingleSourceOptimalMoveHelper(lst, source->nextMove[1]);
-			insertNodeToStartList(lst, rightPath);
-			return rightPath;
-		}
-		else if (res == 0) {
-			leftPath = FindSingleSourceOptimalMoveHelper(lst, source->nextMove[0]);
-			insertNodeToStartList(lst, leftPath);
-			return leftPath;
-		}
-		else {
-			if (source->pos == 'B') { // not sure if it will access the correct data.... need to checkl;
-				leftPath = FindSingleSourceOptimalMoveHelper(lst, source->nextMove[0]);
-				insertNodeToStartList(lst, leftPath);
-				return leftPath;
-			}
-			else {
-				rightPath = FindSingleSourceOptimalMoveHelper(lst, source->nextMove[1]);
-				insertNodeToStartList(lst, rightPath);
-				return rightPath;
-			}
-
-		}
+		FindSingleSourceOptimalMove(source);
 	}
 }
 
@@ -190,6 +167,8 @@ int whatPathToChooseHelper(SingleSourceMovesTreeNode* source) {
 void printList(SingleSourceMovesList* lst) {
 
 	SingleSourceMovesListCell* node;
+	if (isEmptyList(lst))
+		return;
 	node = lst->head;
 
 	while (node != NULL) {
@@ -206,8 +185,8 @@ char whichPlayer(checkersPos* pos, SingleSourceMovesTreeNode* source) {
 
 	char rows, cols,type;
 	rows = pos->row - 'A';
-	cols = pos->col - '0';
+	cols = pos->col - '1';
 
-	type = source->board[rows][cols -1];
+	type = source->board[rows][cols];
 	return type;
 }
