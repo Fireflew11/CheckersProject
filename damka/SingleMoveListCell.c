@@ -62,6 +62,7 @@ void insertNodeToStartList(SingleSourceMovesList* lst, SingleSourceMovesListCell
 SingleSourceMovesList* FindSingleSourceOptimalMove(SingleSourceMovesTree* moves_tree) {
 	SingleSourceMovesList* res = getEmptyList();
 	int whatSide;
+	char player;
 	
 	if (moves_tree != NULL) { // case 1, if there is no tree to begin with;
 
@@ -78,15 +79,28 @@ SingleSourceMovesList* FindSingleSourceOptimalMove(SingleSourceMovesTree* moves_
 			return res;
 		}
 		else {
-			if (whichPlayer(moves_tree->source->pos,moves_tree->source->board) == 'T') { // go right according to the rule of the game (go closer to col 8)
-				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);// maybe its the other way around
-				insertDatatoStartList(res,moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
+			player = whichPlayer(moves_tree->source->pos, moves_tree->source->board);
+			if (moves_tree->source->nextMove[0]->total_caprures_so_far > moves_tree->source->nextMove[1]->total_caprures_so_far) { // checking what path did the most captures.
+				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]);
+				insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
 				return res;
 			}
-			else { // go left according to the rule of the game (go closer to col 0)
-				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]); // maybe its the other way around
-				insertDatatoStartList(res, moves_tree->source);// inserting the "root" of the tree to be the first node in the list;
+			else if (moves_tree->source->nextMove[0]->total_caprures_so_far < moves_tree->source->nextMove[1]->total_caprures_so_far) {
+				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);
+				insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
 				return res;
+			}
+			else {
+				if (player == 'T') { // go right according to the rule of the game (go closer to col 8) // if its the same amount of captures to each move, then go by rule.
+					res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);// maybe its the other way around
+					insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
+					return res;
+				}
+				else { // go left according to the rule of the game (go closer to col 0)
+					res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]); // maybe its the other way around
+					insertDatatoStartList(res, moves_tree->source);// inserting the "root" of the tree to be the first node in the list;
+					return res;
+				}
 			}
 		}
 	}
