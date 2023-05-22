@@ -27,6 +27,9 @@
     <ClCompile Include="SingleMoveListCell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MultipleSourceMoves.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardFunctions.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SingleMoveListCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultipleSourceMoves.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

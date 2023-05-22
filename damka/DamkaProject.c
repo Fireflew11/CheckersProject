@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "BoardFunctions.h"
-#include "singleMoveTree.h"
-#include "SingleMoveListCell.h"
+#include "MultipleSourceMoves.h"
 #define TYPE_FLAG_T 1
 #define TYPE_FLAG_B -1
 typedef unsigned char Player;
@@ -32,25 +31,35 @@ never commit push something that didn't work in testing/debugging
 have fun :)
 
 */
+void Turn(Board board, Player player) {
+	MultipleSourceMovesList* multiList = FindAllPossiblePlayerMoves(board, player);
+	MultipleSourceMovesListCell* bestCell = multiList->head, *curCell = multiList->head->next;
+	while (curCell != NULL) {
+		if (curCell->single_source_moves_list->tail->captures > bestCell->single_source_moves_list->tail->captures)
+			bestCell = curCell;
+		else if (curCell->single_source_moves_list->tail->captures == bestCell->single_source_moves_list->tail->captures) {
+			if (player == 'T' && curCell->single_source_moves_list->head->position->row > bestCell->single_source_moves_list->head->position->row)
+				bestCell = curCell;
+			else if (player == 'T' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
+				player == 'T' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
+				bestCell = curCell;
+			else if (player == 'B' && curCell->single_source_moves_list->head->position->row < bestCell->single_source_moves_list->head->position->row)
+				bestCell = curCell;
+			else if (player == 'B' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
+				player == 'B' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
+				bestCell = curCell;
+		}
+		curCell = curCell->next;
+	}
+	printf("%c  %c", bestCell->single_source_moves_list->head->position->row, bestCell->single_source_moves_list->head->position->col);
 
+}
 
 void main() {
 	Board board;
 	createBoard(board);
 	
-
-	board[2][1] = ' ';
-	board[3][4] = 'T';
-	board[3][2] = 'T';
-	board[2][5] = ' ';
-	board[4][3] = 'B';
-	drawBoard(board);
-	checkersPos* pos = createNewPos('E', '4');
-	SingleSourceMovesTree *tree = FindSingleSourceMoves(board, pos);
-	SingleSourceMovesList* lst = FindSingleSourceOptimalMove(tree);
-	printList(lst);
-	drawBoard(tree->source->nextMove[1]->board);
-	printf(":)");
+	Turn(board, 'T');
 
 
 }

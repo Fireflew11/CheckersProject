@@ -2,10 +2,12 @@
 #define __SINGLE_MOVE_TREE_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define TYPE_FLAG_T 1
 #define TYPE_FLAG_B -1
 #define BOARD_SIZE 8
 typedef unsigned char Board[BOARD_SIZE][BOARD_SIZE];
+typedef unsigned char Player;
 typedef struct _checkersPos
 {
 	char row, col;

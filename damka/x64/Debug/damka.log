@@ -1,2 +1,6 @@
 ﻿  DamkaProject.c
-  damka.vcxproj -> C:\Users\USER\Source\Repos\CheckersProject\x64\Debug\damka.exe
+  MultipleSourceMoves.c
+C:\Users\Tom\source\repos\damka\damka\MultipleSourceMoves.c(9,12): warning C4133: 'return': incompatible types - from 'MultipleSourceMovesList *' to 'MultipleSourceMovesListCell *'
+C:\Users\Tom\source\repos\damka\damka\MultipleSourceMoves.c(29,1): warning C4133: 'initializing': incompatible types - from 'MultipleSourceMovesListCell *' to 'MultipleSourceMovesList *'
+  Generating Code...
+  damka.vcxproj -> C:\Users\Tom\source\repos\damka\x64\Debug\damka.exe

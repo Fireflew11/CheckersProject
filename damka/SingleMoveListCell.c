@@ -38,7 +38,8 @@ bool isEmptyList(SingleSourceMovesList* lst) {
 void insertDatatoStartList(SingleSourceMovesList* lst, SingleSourceMovesTreeNode* source) {
 
 	SingleSourceMovesListCell* newHead;
-	newHead = createNewListNode(source->pos, source->total_caprures_so_far);
+	checkersPos *newPos = createNewPos(source->pos->row, source->pos->col);
+	newHead = createNewListNode(newPos, source->total_caprures_so_far);
 	insertNodeToStartList(lst, newHead);
 
 }
@@ -137,7 +138,7 @@ SingleSourceMovesListCell* FindSingleSourceOptimalMoveHelper(SingleSourceMovesLi
 int whatPathToChoose(SingleSourceMovesTree* moves_tree) {
 
 	int res;
-	if (moves_tree->source != NULL) { //case 1 if there is no tree
+	if (moves_tree->source != NULL) { //case 1 if there is no tree-
 
 		res = whatPathToChooseHelper(moves_tree->source);
 		return res; // 1 if  the right side is longer, 0 if its the left side, -1 if its the same size, -2 if there is no tree;
@@ -161,7 +162,7 @@ int whatPathToChooseHelper(SingleSourceMovesTreeNode* source) {
 	}
 	else if (source->nextMove[1] == NULL) { // case 4, if there is no right sub tree;
 
-		return whatPathToChooseHelper(source->nextMove[0]) +1;
+		return whatPathToChooseHelper(source->nextMove[0]);
 	}
 	else { // if there are branches to both sides;
 
