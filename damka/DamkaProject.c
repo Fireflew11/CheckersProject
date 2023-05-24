@@ -31,35 +31,43 @@ never commit push something that didn't work in testing/debugging
 have fun :)
 
 */
-void Turn(Board board, Player player) {
-	MultipleSourceMovesList* multiList = FindAllPossiblePlayerMoves(board, player);
-	MultipleSourceMovesListCell* bestCell = multiList->head, *curCell = multiList->head->next;
-	while (curCell != NULL) {
-		if (curCell->single_source_moves_list->tail->captures > bestCell->single_source_moves_list->tail->captures)
-			bestCell = curCell;
-		else if (curCell->single_source_moves_list->tail->captures == bestCell->single_source_moves_list->tail->captures) {
-			if (player == 'T' && curCell->single_source_moves_list->head->position->row > bestCell->single_source_moves_list->head->position->row)
-				bestCell = curCell;
-			else if (player == 'T' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
-				player == 'T' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
-				bestCell = curCell;
-			else if (player == 'B' && curCell->single_source_moves_list->head->position->row < bestCell->single_source_moves_list->head->position->row)
-				bestCell = curCell;
-			else if (player == 'B' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
-				player == 'B' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
-				bestCell = curCell;
-		}
-		curCell = curCell->next;
-	}
-	printf("%c  %c", bestCell->single_source_moves_list->head->position->row, bestCell->single_source_moves_list->head->position->col);
-
-}
+//void Turn(Board board, Player player) {
+//	MultipleSourceMovesList* multiList = FindAllPossiblePlayerMoves(board, player);
+//	MultipleSourceMovesListCell* bestCell = multiList->head, *curCell = multiList->head->next;
+//	while (curCell != NULL) {
+//		if (curCell->single_source_moves_list->tail->captures > bestCell->single_source_moves_list->tail->captures)
+//			bestCell = curCell;
+//		else if (curCell->single_source_moves_list->tail->captures == bestCell->single_source_moves_list->tail->captures) {
+//			if (player == 'T' && curCell->single_source_moves_list->head->position->row > bestCell->single_source_moves_list->head->position->row)
+//				bestCell = curCell;
+//			else if (player == 'T' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
+//				player == 'T' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
+//				bestCell = curCell;
+//			else if (player == 'B' && curCell->single_source_moves_list->head->position->row < bestCell->single_source_moves_list->head->position->row)
+//				bestCell = curCell;
+//			else if (player == 'B' && curCell->single_source_moves_list->head->position->row == bestCell->single_source_moves_list->head->position->row &&
+//				player == 'B' && curCell->single_source_moves_list->head->position->col > bestCell->single_source_moves_list->head->position->col)
+//				bestCell = curCell;
+//		}
+//		curCell = curCell->next;
+//	}
+//	printf("%c  %c", bestCell->single_source_moves_list->head->position->row, bestCell->single_source_moves_list->head->position->col);
+//
+//}
 
 void main() {
 	Board board;
 	createBoard(board);
+	checkersPos* pos;
+	SingleSourceMovesList* lst;
+
+	pos = createNewPos('C', '2');
 	
-	Turn(board, 'T');
+	SingleSourceMovesTree* tree = FindSingleSourceMoves(board, pos);
+	
+	lst = FindSingleSourceOptimalMove(tree);
+	
+	//Turn(board, 'T');
 
 
 }
