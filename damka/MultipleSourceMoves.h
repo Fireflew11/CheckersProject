@@ -15,6 +15,6 @@ MultipleSourceMovesListCell* getEmptyMultiList();
 bool isEmptyMultyList(MultipleSourceMovesList* lst);
 MultipleSourceMovesList* FindAllPossiblePlayerMoves(Board board, Player player);
 MultipleSourceMovesListCell* createNewMultiNode(SingleSourceMovesList* lst);
-
+void freeMultiList(MultipleSourceMovesList* lst);
 
 #endif

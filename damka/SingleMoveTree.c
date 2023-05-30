@@ -43,7 +43,7 @@ SingleSourceMovesTreeNode* FindSingleSourcesMovesHelper(Board board, checkersPos
 			nextRightPos = createNewPos(src->row + typeFlag, src->col + 1);
 		//if 1 move to the right is enemy piece and space after it (make sure no edge after it), we can capture it
 		else if (board[src->row + typeFlag - 'A'][src->col + 1 - '1'] == otherType &&
-			(src->col != '8' && src->row != 'B' && src->row != 'G' && board[src->row + 2 * typeFlag - 'A'][src->col + 2 - '1'] == ' '))
+			(src->col != '7' && !(src->row == 'G' && type == 'T') && !(src->row == 'B' && type == 'B') && board[src->row + 2 * typeFlag - 'A'][src->col + 2 - '1'] == ' '))
 			nextRightPos = createNewPos(src->row + 2 * typeFlag, src->col + 2);
 		//else we can't move
 		else
@@ -55,7 +55,7 @@ SingleSourceMovesTreeNode* FindSingleSourcesMovesHelper(Board board, checkersPos
 			nextLeftPos = createNewPos(src->row + typeFlag, src->col - 1);
 		//if 1 move to the left is enemy piece and space after it (make sure no edge after it), we can capture it
 		else if (board[src->row + typeFlag - 'A'][src->col - 1 - '1'] == otherType &&
-			(src->col != '2' && src->row != 'B' && src->row != 'G' && board[src->row + 2 * typeFlag - 'A'][src->col - 2 - '1'] == ' '))
+			(src->col != '2' && !(src->row == 'G' && type == 'T') && !(src->row == 'B' && type == 'B') && board[src->row + 2 * typeFlag - 'A'][src->col - 2 - '1'] == ' '))
 			nextLeftPos = createNewPos(src->row + 2 * typeFlag, src->col - 2);
 		//else we can't move
 		else

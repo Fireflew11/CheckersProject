@@ -132,12 +132,14 @@
     <ClCompile Include="MultipleSourceMoves.c" />
     <ClCompile Include="SingleMoveListCell.c" />
     <ClCompile Include="SingleMoveTree.c" />
+    <ClCompile Include="Turns.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardFunctions.h" />
     <ClInclude Include="MultipleSourceMoves.h" />
     <ClInclude Include="SingleMoveListCell.h" />
     <ClInclude Include="singleMoveTree.h" />
+    <ClInclude Include="Turns.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

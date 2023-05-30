@@ -30,6 +30,9 @@
     <ClCompile Include="MultipleSourceMoves.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Turns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardFunctions.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MultipleSourceMoves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Turns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
