@@ -72,35 +72,35 @@ SingleSourceMovesList* FindSingleSourceOptimalMove(SingleSourceMovesTree* moves_
 
 			res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);
 			insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
-			return upDateList(res);
+			return res;
 		}
 		else if (whatSide == 0) { // we only need to search the left side of the tree;
 			res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]);
 			insertDatatoStartList(res, moves_tree->source);// inserting the "root" of the tree to be the first node in the list;
-			return upDateList(res);
+			return res;
 		}
 		else {
 			player = whichPlayer(moves_tree->source->pos, moves_tree->source->board);
 			if (moves_tree->source->nextMove[0]->total_caprures_so_far > moves_tree->source->nextMove[1]->total_caprures_so_far) { // checking what path did the most captures.
 				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]);
 				insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
-				return upDateList(res);
+				return res;
 			}
 			else if (moves_tree->source->nextMove[0]->total_caprures_so_far < moves_tree->source->nextMove[1]->total_caprures_so_far) {
 				res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);
 				insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
-				return upDateList(res);
+				return res;
 			}
 			else {
 				if (player == 'T') { // go right according to the rule of the game (go closer to col 8) // if its the same amount of captures to each move, then go by rule.
 					res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[1]);// maybe its the other way around
 					insertDatatoStartList(res, moves_tree->source); // inserting the "root" of the tree to be the first node in the list;
-					return upDateList(res);
+					return res;
 				}
 				else { // go left according to the rule of the game (go closer to col 0)
 					res->head = FindSingleSourceOptimalMoveHelper(res, moves_tree->source->nextMove[0]); // maybe its the other way around
 					insertDatatoStartList(res, moves_tree->source);// inserting the "root" of the tree to be the first node in the list;
-					return upDateList(res);
+					return res;
 				}
 			}
 		}
@@ -204,25 +204,4 @@ char whichPlayer(checkersPos* pos, SingleSourceMovesTreeNode* source) {
 
 	type = source->board[rows][cols];
 	return type;
-}
-
-//This function gets a list without a tail, and adds the tail to the "tail" section in the list;
-SingleSourceMovesList* upDateList(SingleSourceMovesList* res) {
-
-	SingleSourceMovesListCell* node;
-	bool flag = true;
-	node = res->head;
-
-	while (node != NULL && flag) {
-
-		if (node->next == NULL) {
-
-			res->tail = node;
-			flag = false;
-		}
-		else
-			node = node->next;
-	}
-
-	return res;
 }

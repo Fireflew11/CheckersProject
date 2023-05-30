@@ -1,21 +1,2 @@
-﻿  SingleMoveListCell.c
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(73,53): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(73,83): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(78,53): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(78,83): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(83,75): warning C4047: 'function': 'SingleSourceMovesTreeNode *' differs in levels of indirection from 'Board'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(83,68): warning C4024: 'whichPlayer': different types for formal and actual parameter 2
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(85,54): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(85,84): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(90,54): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(90,84): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(96,55): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(96,85): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(101,55): warning C4133: 'function': incompatible types - from 'SingleSourceMovesList *' to 'SingleSourceMovesTreeNode *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(101,85): warning C4020: 'FindSingleSourceOptimalMoveHelper': too many actual parameters
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(112,85): warning C4028: formal parameter 1 different from declaration
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(112,125): warning C4029: declared formal parameter list different from definition
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(132,37): warning C4133: 'function': incompatible types - from 'SingleSourceMovesTreeNode *' to 'SingleSourceMovesTree *'
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(115,6): warning C4101: 'res': unreferenced local variable
-C:\Users\USER\Source\Repos\CheckersProject\damka\SingleMoveListCell.c(134): warning C4715: 'FindSingleSourceOptimalMoveHelper': not all control paths return a value
-  damka.vcxproj -> C:\Users\USER\Source\Repos\CheckersProject\x64\Debug\damka.exe
+﻿  Turns.c
+  damka.vcxproj -> C:\Users\Tom\source\repos\damka\x64\Debug\damka.exe

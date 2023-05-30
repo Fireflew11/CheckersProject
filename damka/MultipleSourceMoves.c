@@ -25,6 +25,32 @@ void insertMultiToEndList(MultipleSourceMovesList* lst, MultipleSourceMovesListC
 	}
 }
 
+void addTailToList(SingleSourceMovesList* lst) {
+	SingleSourceMovesListCell* curCell = lst->head;
+	while (curCell->next != NULL) {
+		curCell = curCell->next;
+	}
+	lst->tail = curCell;
+}
+
+void freeMultiList(MultipleSourceMovesList* lst) {
+	MultipleSourceMovesListCell* curCell = lst->head;
+	while (curCell != NULL)
+	{
+		SingleSourceMovesListCell* curSingleCell = curCell->single_source_moves_list->head;
+		while (curSingleCell != NULL) {
+			free(curSingleCell->position);
+			SingleSourceMovesListCell* saver = curSingleCell;
+			curSingleCell = curSingleCell->next;
+			free(saver);
+		}
+		MultipleSourceMovesListCell* saver = curCell;
+		curCell = curCell->next;
+		free(saver);
+	}
+	free(lst);
+}
+
 MultipleSourceMovesList* FindAllPossiblePlayerMoves(Board board, Player player) {
 	MultipleSourceMovesList* res = getEmptyMultiList();
 	checkersPos* curPos;
@@ -46,6 +72,7 @@ MultipleSourceMovesList* FindAllPossiblePlayerMoves(Board board, Player player) 
 				{
 					//find his optimal move, and insert it the the multipleSourceMovesList
 					optimalMove = FindSingleSourceOptimalMove(src);
+					addTailToList(optimalMove);
 					MultipleSourceMovesListCell* newCell = createNewMultiNode(optimalMove);
 					insertMultiToEndList(res, newCell);
 				}
