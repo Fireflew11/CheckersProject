@@ -28,7 +28,7 @@ void insertNodeToEndList(SingleSourceMovesList* lst, SingleSourceMovesListCell* 
 
 bool isEmptyList(SingleSourceMovesList* lst) {
 
-	if (lst == NULL)
+	if (lst->head == NULL)
 		return true;
 	else
 		return false;
@@ -56,6 +56,7 @@ void insertNodeToStartList(SingleSourceMovesList* lst, SingleSourceMovesListCell
 	else {
 		node->next = lst->head;
 		lst->head = node;
+		
 
 	}
 }
@@ -111,7 +112,7 @@ SingleSourceMovesList* FindSingleSourceOptimalMove(SingleSourceMovesTree* moves_
 
 SingleSourceMovesListCell* FindSingleSourceOptimalMoveHelper(SingleSourceMovesList* lst, SingleSourceMovesTreeNode* source) {
 
-	SingleSourceMovesListCell* leftPath,*rightPath;
+	SingleSourceMovesListCell* leftPath,*rightPath, *newHead;
 	int res;
 
 	// case 2; we only have one move to play;
@@ -120,13 +121,37 @@ SingleSourceMovesListCell* FindSingleSourceOptimalMoveHelper(SingleSourceMovesLi
 	}
 	else if (source->nextMove[0] == NULL) {//case 3; there is no sub left tree, we can only move to the right;
 		rightPath = FindSingleSourceOptimalMoveHelper(lst, source->nextMove[1]);
-		insertNodeToStartList(lst, rightPath);
-		return rightPath;
+		if (rightPath->position  != source->pos) {
+			newHead = createNewListNode(source->pos, source->total_caprures_so_far);
+			if (isEmptyList(lst)) {
+				insertNodeToStartList(lst, newHead);
+				insertNodeToEndList(lst, rightPath);
+			}
+			else
+				insertNodeToStartList(lst, newHead);
+			return newHead;
+		}
+		else {
+			insertNodeToStartList(lst, rightPath);
+			return rightPath;
+		}
 	}
 	else if (source->nextMove[1] == NULL) {//case 4, there is no sub right tree, we can only move left;
 		leftPath = FindSingleSourceOptimalMoveHelper(lst,source->nextMove[0]);
-		insertNodeToStartList(lst, leftPath);
-		return leftPath;
+		if (leftPath = !source) {
+			newHead = createNewListNode(source->pos, source->total_caprures_so_far);
+			if (isEmptyList(lst)) {
+				insertNodeToStartList(lst, newHead);
+				insertNodeToEndList(lst, leftPath);
+			}
+			else
+				insertNodeToStartList(lst, newHead);
+			return newHead;
+		}
+		else {
+			insertNodeToStartList(lst, leftPath);
+			return leftPath;
+		}
 	}
 	else { //case 5, there are sub trees to the right and left;
 		FindSingleSourceOptimalMove(source);
@@ -146,38 +171,6 @@ int whatPathToChoose(SingleSourceMovesTree* moves_tree) {
 	res = -2;
 	return res;
 }
-
-//A function that checks what sub tree is longer; O(n)
-int whatPathToChooseHelper(SingleSourceMovesTreeNode* source) {
-	 
-	int resLeft,resRight;
-
-	if (source->nextMove[0] == NULL && source->nextMove[1] == NULL) { // case 2 if there is only 1 node in the tree
-
-		return 0;
-	}
-	else if (source->nextMove[0] == NULL) { // case 3, if there is no left sub tree;
-
-		return  whatPathToChooseHelper(source->nextMove[1]) + 1;
-	}
-	else if (source->nextMove[1] == NULL) { // case 4, if there is no right sub tree;
-
-		return whatPathToChooseHelper(source->nextMove[0]);
-	}
-	else { // if there are branches to both sides;
-
-		resLeft = whatPathToChooseHelper(source->nextMove[0]);
-		resRight = whatPathToChooseHelper(source->nextMove[1]);
-
-		if (resRight > resLeft) // if the right sub tree is bigger
-			return 1;
-		if (resRight < resLeft)//if the left sub tree is bigger
-			return 0;
-		else // if they are the same size.
-			return -1;
-	}
-}
-
 
 void printList(SingleSourceMovesList* lst) {
 
@@ -204,4 +197,30 @@ char whichPlayer(checkersPos* pos, SingleSourceMovesTreeNode* source) {
 
 	type = source->board[rows][cols];
 	return type;
+}
+
+
+int countNodes(SingleSourceMovesTreeNode* node) {
+	if (node == NULL)
+		return 0;
+
+	int leftCount = countNodes(node->nextMove[0]);
+	int rightCount = countNodes(node->nextMove[1]);
+
+	return leftCount + rightCount + 1;
+}
+
+int whatPathToChooseHelper(SingleSourceMovesTreeNode* source) {
+	if (source == NULL)
+		return -1; // If the node is NULL, consider it as a balanced subtree.
+
+	int leftCount = countNodes(source->nextMove[0]);
+	int rightCount = countNodes(source->nextMove[1]);
+
+	if (rightCount > leftCount)
+		return 1; // If the right subtree is longer.
+	else if (leftCount > rightCount)
+		return 0; // If the left subtree is longer.
+	else
+		return -1; // If both sides have the same number of nodes.
 }

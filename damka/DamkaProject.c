@@ -32,8 +32,25 @@ have fun :)
 
 void main() {
 	Board board;
+	SingleSourceMovesList* lst;
+	SingleSourceMovesTree* tr;
+	checkersPos* pos;
 	createBoard(board);
-	PlayGame(board, 'T');
+	
+	board[3][2] = 'B';
+	board[6][5] = ' ';
+	pos = createNewPos('C', '2');
+	tr = FindSingleSourceMoves(tr, pos);
+
+	lst = FindSingleSourceOptimalMove(tr);
+
+
+	
+
+	
+
+	/*createBoard(board);*/
+	//PlayGame(board, 'T');
 
 
 }

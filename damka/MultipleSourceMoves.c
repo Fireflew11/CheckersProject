@@ -77,13 +77,14 @@ MultipleSourceMovesList* FindAllPossiblePlayerMoves(Board board, Player player) 
 					MultipleSourceMovesListCell* newCell = createNewMultiNode(optimalMove);
 					insertMultiToEndList(res, newCell);
 				}
-				
+
 				free(curPos);
 				free(src);
 			}
 		}
 	}
 	return res;
+}
 =======
 #include "MultipleSourceMoves.h"
 bool isEmptyMultiList(MultipleSourceMovesList * lst) {

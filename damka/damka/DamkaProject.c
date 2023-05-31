@@ -31,6 +31,7 @@ have fun :)
 
 void main() {
 	Board board;
+
 	createBoard(board);
 	PlayGame(board, 'T');
 

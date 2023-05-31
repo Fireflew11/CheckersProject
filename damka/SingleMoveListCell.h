@@ -21,3 +21,4 @@ int whatPathToChooseHelper(SingleSourceMovesTreeNode* source);
 void printList(SingleSourceMovesList* lst);
 char whichPlayer(checkersPos* pos, SingleSourceMovesTreeNode* source);
 void insertDatatoStartList(SingleSourceMovesList* lst, SingleSourceMovesTreeNode* source);
+int countNodes(SingleSourceMovesTreeNode* node);
